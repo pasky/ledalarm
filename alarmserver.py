@@ -4,6 +4,7 @@ from __future__ import print_function, division
 
 import datetime
 import RPi.GPIO as GPIO
+import random
 import sched
 import serial
 import time
@@ -71,14 +72,21 @@ class LED:
             if not self.wakeup:
                 return
         time.sleep(900)
-        while self.wakeup:
-            time.sleep(0.6)
+        for i in range(3600):
+            time.sleep(0.6 + random.random()-0.5)
             self.intensity(192)
-            time.sleep(0.6)
+            time.sleep(0.4 + (random.random()-0.5)/2)
             self.intensity(0)
+            if not self.wakeup:
+                return
+        self.wakeup = False
 
 
 def snooze():
+    if led.wakeup:
+        panel.blink(delay=0.1, repeats=2)
+    else:
+        panel.blink(repeats=2)
     led.wakeup = False
     led.intensity(0)
 
