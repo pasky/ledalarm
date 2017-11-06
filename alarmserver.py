@@ -83,13 +83,15 @@ class LED:
         self.wakeup = False
 
 
-def snooze():
+def snooze(_):
     if led.wakeup:
         print('SNOOZE')
         panel.blink(delay=0.1, repeats=2)
     else:
         print('SNOOZE nop')
+        led.intensity(1)
         panel.blink(repeats=2)
+        led.intensity(0)
     led.wakeup = False
     led.intensity(0)
 
