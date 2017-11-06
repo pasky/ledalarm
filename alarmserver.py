@@ -91,7 +91,8 @@ def snooze():
     led.intensity(0)
 
 
-def alarmtime(hour=8, minute=0):
+# hour in GMT (-1h), and subtract ~12min. for early weak intensities
+def alarmtime(hour=6, minute=48):
     day_ofs = hour * 3600 + minute * 60
     t = time.time()
     day_start = (t // 86400) * 86400
