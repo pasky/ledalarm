@@ -49,7 +49,7 @@ class LED:
     def intensity(self, value):
         self.ser.write("%d\n" % (value,))
 
-    def wakeup(self, delay=4):
+    def run_wakeup(self, delay=4):
         self.wakeup = True
         for i in range(1, 10):
             self.intensity(i)
@@ -94,7 +94,7 @@ def snooze():
 def alarmtime(hour=8, minute=0):
     day_ofs = hour * 3600 + minute * 60
     t = time.time()
-    day_start = t // 86400
+    day_start = (t // 86400) * 86400
     if t - day_start < day_ofs:
         return day_start + day_ofs
     else:
@@ -110,6 +110,6 @@ if __name__ == "__main__":
     while True:
         t = alarmtime()
         print('setting time %d (now %d)' % (t, time.time()))
-        s.enterabs(t, 0, led.wakeup, [])
+        s.enterabs(t, 0, led.run_wakeup, ())
         print('zzz...')
         s.run()
