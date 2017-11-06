@@ -108,7 +108,8 @@ if __name__ == "__main__":
     s = sched.scheduler(time.time, time.sleep)
 
     while True:
-        print('setting time')
-        s.enterabs(alarmtime(), 0, led.wakeup, ())
+        t = alarmtime()
+        print('setting time %d (now %d)' % (t, time.time()))
+        s.enterabs(t, 0, led.wakeup, [])
         print('zzz...')
         s.run()
