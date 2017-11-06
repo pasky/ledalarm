@@ -47,6 +47,7 @@ class LED:
         self.ser.write("0\n")
 
     def intensity(self, value):
+        print('int: %d' % (value,))
         self.ser.write("%d\n" % (value,))
 
     def run_wakeup(self, delay=4):
@@ -84,8 +85,10 @@ class LED:
 
 def snooze():
     if led.wakeup:
+        print('SNOOZE')
         panel.blink(delay=0.1, repeats=2)
     else:
+        print('SNOOZE nop')
         panel.blink(repeats=2)
     led.wakeup = False
     led.intensity(0)
