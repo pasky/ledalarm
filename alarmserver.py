@@ -101,6 +101,6 @@ if __name__ == "__main__":
 
     while True:
         print('setting time')
-        s.enterabs(alarmtime(), 0, led.wakeup)
+        s.enterabs(alarmtime(), 0, led.wakeup, ())
         print('zzz...')
         s.run()
