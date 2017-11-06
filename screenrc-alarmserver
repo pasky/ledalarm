@@ -1,0 +1,4 @@
+autodetach on
+startup_message off
+
+screen -t alarmserver 0 sh -c 'cd /home/pi/ledalarm; logger "alarmserver pre-path: $PATH"; PATH=/usr/local/sbin:/usr/local/bin:$PATH ./alarmserver.py'

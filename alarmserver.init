@@ -1,0 +1,34 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          alarmserver
+# Required-Start:    $remote_fs
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Start alarmserver
+# Description:       start alarmserver screen
+### END INIT INFO
+
+NAME=alarmserver
+PIDFILE=/var/run/$NAME.pid
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+        log_daemon_msg Starting alarmserver
+        logger starting alarmserver
+        /usr/bin/screen -dmS alarmserver -c /home/pi/.screenrc-alarmserver
+        log_end_msg $?
+        ;;
+  stop|restart|force-reload)
+        # No-op
+        ;;
+  status)
+        # No-op
+        ;;
+  *)
+        echo "Usage: $NAME {start|stop|restart|force-reload}" >&2
+        exit 3
+        ;;
+esac
